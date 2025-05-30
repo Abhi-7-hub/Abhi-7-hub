@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stylish Paragraph Cards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+      margin: 0;
+    }
+
+    #container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px 10px 20px 0;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .para-card {
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease;
+      color: white;
+    }
+
+    /* Color palette */
+    .color1 { background-color: #ff6b6b; }
+    .color2 { background-color: #6bc1ff; }
+    .color3 { background-color: #6bff95; }
+    .color4 { background-color: #ffe36b; color: #333; }
+    .color5 { background-color: #b96bff; }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      #container {
+        padding: 15px;
+      }
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <button id="magic">Add Paragraph</button>
+    <button id="magic1">Delete Last Paragraph</button>
+  </div>
+
+  <script>
+    let container = document.getElementById("container");
+    let button = document.getElementById("magic");
+    let button1 = document.getElementById("magic1");
+
+    // Colors list for paragraphs
+    let colors = ["color1", "color2", "color3", "color4", "color5"];
+    let colorIndex = 0;
+
+    button.addEventListener("click", function () {
+      let para = document.createElement("div");
+      para.classList.add("para-card");
+
+      // Add a color class from the list, and rotate it
+      para.classList.add(colors[colorIndex]);
+      colorIndex = (colorIndex + 1) % colors.length;
+
+      para.innerText = "Hello! Ye ek paragraph card hai. 🎉";
+      container.appendChild(para);
+    });
+
+    button1.addEventListener("click", function () {
+      let lastElement = container.lastElementChild;
+      if (lastElement && lastElement.classList.contains("para-card")) {
+        container.removeChild(lastElement);
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meal Data Fetcher</title>
+<style>
+  #output {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 0 20px;
+  }
+
+  .meal-card {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .meal-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  }
+
+  .meal-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .meal-card img:hover {
+    transform: scale(1.05) rotate(1deg);
+  }
+
+  .meal-card h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #333;
+  }
+
+  /* Optional: Button Styling */
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+
+</head>
+<body>
+  <section id="container">
+    <button id="get-category-data">Get Category Data</button>
+    <button id="get-ingredient-data">Get Ingredient Data</button>
+
+     <div id="output"></div>
+  </section>
+
+  <script src="index.js"></script>
+</body>
+</html>

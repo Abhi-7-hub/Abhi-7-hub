@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Button Click Paragraph</title>
+</head>
+<body>
+
+  <div id="container">
+    <button id="magic">Add Paragraph</button>
+    <button id="magic1">Delete Last Paragraph</button>
+  </div>
+
+  <script>
+    // container div ko pakda
+    let container = document.getElementById("container");
+
+    // buttons pakde
+    let button = document.getElementById("magic");
+    let button1 = document.getElementById("magic1");
+
+    // paragraph add karne wala button
+    button.addEventListener("click", function () {
+      let para = document.createElement("p");
+      para.innerText = "Hello! Ye paragraph button click karne par aaya hai.";
+      container.appendChild(para);
+    });
+
+    // paragraph delete karne wala button (last waala hi delete karega)
+    button1.addEventListener("click", function () {
+      // container ke last child ko check karo
+      let lastElement = container.lastElementChild;
+
+      // agar wo last child ek <p> tag hai, to use hatao
+      if (lastElement.tagName === "P") {
+        container.removeChild(lastElement);
+      }
+    });
+  </script>
+
+</body>
+</html>
