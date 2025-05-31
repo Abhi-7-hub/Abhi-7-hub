@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+      background-color: #4a90e2;
+      border-radius: 3px;
+    }
+
+    .header h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .form-control {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-control label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .form-control input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1.5px solid #ccc;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .form-control input:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 5px #4a90e270;
+    }
+
+    .form-control i {
+      position: absolute;
+      right: 10px;
+      top: 38px;
+      visibility: hidden;
+      font-size: 18px;
+    }
+
+    .form-control.success input {
+      border-color: #2ecc71;
+    }
+
+    .form-control.error input {
+      border-color: #e74c3c;
+    }
+
+    .form-control.success i.fa-circle-check {
+      color: #2ecc71;
+      visibility: visible;
+    }
+
+    .form-control.error i.fa-circle-exclamation {
+      color: #e74c3c;
+      visibility: visible;
+    }
+
+    .form-control small {
+      color: #e74c3c;
+      visibility: hidden;
+      position: absolute;
+      bottom: -18px;
+      left: 0;
+      font-size: 13px;
+    }
+
+    .form-control.error small {
+      visibility: visible;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #3b7acb;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper .toggle-password {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 2;
+      user-select: none;
+    }
+
+    .password-wrapper input {
+      padding-left: 36px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .form-control input {
+        font-size: 15px;
+      }
+
+      .btn {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>REGISTRATION FORM</h2>
+      <form class="form" id="form">
+        <div class="form-control">
+          <label>Username</label>
+          <input type="text" id="username" placeholder="Enter Your Fullname">
+          <i class="fa-solid fa-circle-check"></i>
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter Your Email">
+          <i class="fa-solid fa-circle-check"></i>
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label>Mobile Number</label>
+          <input type="text" id="phone" placeholder="Enter Your Mobile Number">
+          <i class="fa-solid fa-circle-check"></i>
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label>Password</label>
+          <div class="password-wrapper">
+            <span class="toggle-password" onclick="togglePassword('password', this)">👁️</span>
+            <input type="password" id="password" placeholder="Enter Your Password">
+          </div>
+          <i class="fa-solid fa-circle-check"></i>
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label>Confirm Password</label>
+          <div class="password-wrapper">
+            <span class="toggle-password" onclick="togglePassword('cpassword', this)">👁️</span>
+            <input type="password" id="cpassword" placeholder="Enter Password Again">
+          </div>
+          <i class="fa-solid fa-circle-check"></i>
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <small>Error message</small>
+        </div>
+
+        <input type="submit" value="Submit" class="btn">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('form');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const password = document.getElementById('password');
+    const cpassword = document.getElementById('cpassword');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if(validate()) {
+        alert("Registration Successful");
+        window.location.href = "dashboard.html"; 
+      }
+    });
+
+    const isEmail = (emailVal) => {
+      var atSymbol = emailVal.indexOf("@");
+      var dot = emailVal.lastIndexOf(".");
+      return atSymbol > 0 && dot > atSymbol + 2 && dot < emailVal.length - 1;
+    };
+
+    function validate() {
+      const usernameVal = username.value.trim();
+      const emailVal = email.value.trim();
+      const phoneVal = phone.value.trim();
+      const passwordVal = password.value.trim();
+      const cpasswordVal = cpassword.value.trim();
+
+      let isValid = true;
+
+      if (usernameVal === "") {
+        setErrorMsg(username, "Username cannot be blank");
+        isValid = false;
+      } else if (usernameVal.length <= 2) {
+        setErrorMsg(username, "Username must be more than 2 characters");
+        isValid = false;
+      } else {
+        setSuccessMsg(username);
+      }
+
+      if (emailVal === "") {
+        setErrorMsg(email, "Email cannot be blank");
+        isValid = false;
+      } else if (!isEmail(emailVal)) {
+        setErrorMsg(email, "Not a valid email");
+        isValid = false;
+      } else {
+        setSuccessMsg(email);
+      }
+
+      if (phoneVal === "") {
+        setErrorMsg(phone, "Phone number cannot be blank");
+        isValid = false;
+      } else if (!/^[0-9]{10}$/.test(phoneVal)) {
+        setErrorMsg(phone, "Phone number must be 10 digits");
+        isValid = false;
+      } else {
+        setSuccessMsg(phone);
+      }
+
+      if (passwordVal === "") {
+        setErrorMsg(password, "Password cannot be blank");
+        isValid = false;
+      } else if (passwordVal.length < 6) {
+        setErrorMsg(password, "Password must be at least 6 characters");
+        isValid = false;
+      } else {
+        setSuccessMsg(password);
+      }
+
+      if (cpasswordVal === "") {
+        setErrorMsg(cpassword, "Please confirm your password");
+        isValid = false;
+      } else if (cpasswordVal !== passwordVal) {
+        setErrorMsg(cpassword, "Passwords do not match");
+        isValid = false;
+      } else {
+        setSuccessMsg(cpassword);
+      }
+
+      return isValid;
+    }
+
+    function setErrorMsg(input, msg) {
+      const formControl = input.closest(".form-control");
+      const small = formControl.querySelector("small");
+      formControl.className = "form-control error";
+      small.innerText = msg;
+    }
+
+    function setSuccessMsg(input) {
+      const formControl = input.closest(".form-control");
+      formControl.className = "form-control success";
+    }
+
+    function togglePassword(id, toggleSpan) {
+      const input = document.getElementById(id);
+      if (input.type === "password") {
+        input.type = "text";
+        toggleSpan.textContent = "🙈";
+      } else {
+        input.type = "password";
+        toggleSpan.textContent = "👁️";
+      }
+    }
+  </script>
+</body>
+</html>
