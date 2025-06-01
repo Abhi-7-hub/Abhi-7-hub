@@ -1,0 +1,170 @@
+{
+
+    "user1": {
+      "name": "Abhishek Pratap Singh",
+      "email": "abhishek1@example.com",
+      "age": 24,
+      "groups": {
+        "mernDevelopers": true,
+        "students": true
+      }
+    },
+    "user2": {
+      "name": "Riya Sharma",
+      "email": "riya2@example.com",
+      "age": 22,
+      "groups": {
+        "students": true
+      }
+    },
+    "user3": {
+      "name": "Vikram Singh",
+      "email": "vikram3@example.com",
+      "age": 27,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user4": {
+      "name": "Neha Gupta",
+      "email": "neha4@example.com",
+      "age": 21,
+      "groups": {
+        "students": true,
+        "designers": true
+      }
+    },
+    "user5": {
+      "name": "Rahul Verma",
+      "email": "rahul5@example.com",
+      "age": 29,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user6": {
+      "name": "Sonal Kapoor",
+      "email": "sonal6@example.com",
+      "age": 23,
+      "groups": {
+        "students": true
+      }
+    },
+    "user7": {
+      "name": "Karan Malhotra",
+      "email": "karan7@example.com",
+      "age": 26,
+      "groups": {
+        "mernDevelopers": true,
+        "designers": true
+      }
+    },
+    "user8": {
+      "name": "Anjali Mehta",
+      "email": "anjali8@example.com",
+      "age": 20,
+      "groups": {
+        "students": true
+      }
+    },
+    "user9": {
+      "name": "Deepak Joshi",
+      "email": "deepak9@example.com",
+      "age": 28,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user10": {
+      "name": "Pooja Nair",
+      "email": "pooja10@example.com",
+      "age": 24,
+      "groups": {
+        "students": true
+      }
+    },
+    "user11": {
+      "name": "Siddharth Rao",
+      "email": "siddharth11@example.com",
+      "age": 25,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user12": {
+      "name": "Neetu Singh",
+      "email": "neetu12@example.com",
+      "age": 22,
+      "groups": {
+        "students": true,
+        "designers": true
+      }
+    },
+    "user13": {
+      "name": "Rohit Kumar",
+      "email": "rohit13@example.com",
+      "age": 27,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user14": {
+      "name": "Shreya Jain",
+      "email": "shreya14@example.com",
+      "age": 23,
+      "groups": {
+        "students": true
+      }
+    },
+    "user15": {
+      "name": "Amit Chaudhary",
+      "email": "amit15@example.com",
+      "age": 28,
+      "groups": {
+        "mernDevelopers": true,
+        "students": true
+      }
+    },
+    "user16": {
+      "name": "Priya Desai",
+      "email": "priya16@example.com",
+      "age": 21,
+      "groups": {
+        "students": true
+      }
+    },
+    "user17": {
+      "name": "Manish Patel",
+      "email": "manish17@example.com",
+      "age": 29,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user18": {
+      "name": "Kavita Joshi",
+      "email": "kavita18@example.com",
+      "age": 24,
+      "groups": {
+        "students": true,
+        "designers": true
+      }
+    },
+    "user19": {
+      "name": "Ajay Singh",
+      "email": "ajay19@example.com",
+      "age": 26,
+      "groups": {
+        "mernDevelopers": true
+      }
+    },
+    "user20": {
+      "name": "Simran Kaur",
+      "email": "simran20@example.com",
+      "age": 22,
+      "groups": {
+        "students": true
+      }
+    }
+  
+}

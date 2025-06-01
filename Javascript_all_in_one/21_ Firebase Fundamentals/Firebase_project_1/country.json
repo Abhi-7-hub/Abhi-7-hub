@@ -1,0 +1,122 @@
+{
+  "country1": {
+    "name": "India",
+    "code": "IN",
+    "currency": "Indian Rupee",
+    "currencyCode": "INR"
+  },
+  "country2": {
+    "name": "United States",
+    "code": "US",
+    "currency": "US Dollar",
+    "currencyCode": "USD"
+  },
+  "country3": {
+    "name": "United Kingdom",
+    "code": "GB",
+    "currency": "Pound Sterling",
+    "currencyCode": "GBP"
+  },
+  "country4": {
+    "name": "Japan",
+    "code": "JP",
+    "currency": "Yen",
+    "currencyCode": "JPY"
+  },
+  "country5": {
+    "name": "Canada",
+    "code": "CA",
+    "currency": "Canadian Dollar",
+    "currencyCode": "CAD"
+  },
+  "country6": {
+    "name": "Australia",
+    "code": "AU",
+    "currency": "Australian Dollar",
+    "currencyCode": "AUD"
+  },
+  "country7": {
+    "name": "Germany",
+    "code": "DE",
+    "currency": "Euro",
+    "currencyCode": "EUR"
+  },
+  "country8": {
+    "name": "France",
+    "code": "FR",
+    "currency": "Euro",
+    "currencyCode": "EUR"
+  },
+  "country9": {
+    "name": "Brazil",
+    "code": "BR",
+    "currency": "Brazilian Real",
+    "currencyCode": "BRL"
+  },
+  "country10": {
+    "name": "South Africa",
+    "code": "ZA",
+    "currency": "South African Rand",
+    "currencyCode": "ZAR"
+  },
+  "country11": {
+    "name": "Russia",
+    "code": "RU",
+    "currency": "Russian Ruble",
+    "currencyCode": "RUB"
+  },
+  "country12": {
+    "name": "Mexico",
+    "code": "MX",
+    "currency": "Mexican Peso",
+    "currencyCode": "MXN"
+  },
+  "country13": {
+    "name": "China",
+    "code": "CN",
+    "currency": "Renminbi",
+    "currencyCode": "CNY"
+  },
+  "country14": {
+    "name": "Italy",
+    "code": "IT",
+    "currency": "Euro",
+    "currencyCode": "EUR"
+  },
+  "country15": {
+    "name": "Saudi Arabia",
+    "code": "SA",
+    "currency": "Saudi Riyal",
+    "currencyCode": "SAR"
+  },
+  "country16": {
+    "name": "South Korea",
+    "code": "KR",
+    "currency": "South Korean Won",
+    "currencyCode": "KRW"
+  },
+  "country17": {
+    "name": "Nigeria",
+    "code": "NG",
+    "currency": "Naira",
+    "currencyCode": "NGN"
+  },
+  "country18": {
+    "name": "Argentina",
+    "code": "AR",
+    "currency": "Argentine Peso",
+    "currencyCode": "ARS"
+  },
+  "country19": {
+    "name": "Turkey",
+    "code": "TR",
+    "currency": "Turkish Lira",
+    "currencyCode": "TRY"
+  },
+  "country20": {
+    "name": "Indonesia",
+    "code": "ID",
+    "currency": "Indonesian Rupiah",
+    "currencyCode": "IDR"
+  }
+}
