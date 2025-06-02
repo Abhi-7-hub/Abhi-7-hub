@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 Ultra Colorful Photo Frenzy 🌈</title>
+    <style>
+        :root {
+            --rainbow-1: #FF355E;
+            --rainbow-2: #FF6037;
+            --rainbow-3: #FF9966;
+            --rainbow-4: #FFCC33;
+            --rainbow-5: #FFFF66;
+            --rainbow-6: #CCFF00;
+            --rainbow-7: #66FF66;
+            --rainbow-8: #50BFE6;
+            --rainbow-9: #FF6EFF;
+            --rainbow-10: #EE34D2;
+            --dark: #2A2A2A;
+            --light: #FFFADB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, var(--rainbow-8), var(--rainbow-6));
+            background-attachment: fixed;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, 
+                var(--rainbow-1), var(--rainbow-3), var(--rainbow-5), 
+                var(--rainbow-7), var(--rainbow-9), var(--rainbow-10));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px dashed var(--light);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 0 var(--dark);
+            animation: bounce 2s infinite, rainbowText 8s infinite;
+            background: var(--light);
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            border: 5px dotted var(--rainbow-10);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 1rem auto;
+            font-weight: bold;
+            color: var(--light);
+            text-shadow: 2px 2px 0 var(--dark);
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--light);
+            opacity: 0;
+            animation: fall linear infinite;
+            border-radius: 50%;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px dotted var(--rainbow-5);
+            border-top: 3px dotted var(--rainbow-5);
+        }
+
+        .filter-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, var(--rainbow-2), var(--rainbow-4));
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 3px solid white;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-5px) rotate(3deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            animation: btnPulse 0.5s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, var(--rainbow-9), var(--rainbow-10));
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--rainbow-9);
+            z-index: 2;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
+            aspect-ratio: 1/1;
+            transform-style: preserve-3d;
+            border: 5px solid white;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) rotate(5deg) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            z-index: 10;
+            border-color: var(--rainbow-5);
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+
+        .gallery-item:hover img, .gallery-item:hover video {
+            transform: scale(1.15);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            transition: all 0.4s ease;
+            z-index: 2;
+            font-size: 1.1rem;
+        }
+
+        .gallery-item:hover .caption {
+            bottom: 0;
+        }
+
+        .category-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--rainbow-1), var(--rainbow-3));
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 3;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item:hover .category-tag {
+            opacity: 1;
+            transform: translateY(0) rotate(5deg);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1000;
+            overflow: auto;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .modal-media {
+            max-width: 85%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255,255,255,0.3);
+            animation: popIn 0.6s ease forwards;
+            border: 5px solid var(--rainbow-5);
+        }
+
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            max-width: 80%;
+            background: rgba(0,0,0,0.7);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px dashed var(--rainbow-8);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 10px var(--rainbow-9);
+            background: rgba(255,255,255,0.2);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            transform: rotate(180deg) scale(1.2);
+            color: var(--rainbow-5);
+            background: rgba(255,255,255,0.4);
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 4rem;
+            cursor: pointer;
+            padding: 1.5rem;
+            user-select: none;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 10px var(--rainbow-9);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.5);
+            transform: translateY(-50%) scale(1.2);
+            color: var(--rainbow-2);
+        }
+
+        .prev {
+            left: 40px;
+        }
+
+        .next {
+            right: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(90deg, 
+                var(--rainbow-10), var(--rainbow-8), var(--rainbow-6));
+            color: white;
+            font-size: 1.2rem;
+            border-top: 5px dashed var(--light);
+        }
+
+        .emoji {
+            font-size: 2rem;
+            animation: spin 3s linear infinite, float 4s ease-in-out infinite;
+            display: inline-block;
+            margin: 0 0.5rem;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+        }
+
+        .fun-fact {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--rainbow-4), var(--rainbow-6));
+            color: var(--dark);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-width: 350px;
+            display: none;
+            z-index: 100;
+            animation: slideIn 0.6s ease forwards;
+            border: 3px solid white;
+        }
+
+        .fun-fact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--rainbow-1);
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+        }
+
+        .close-fact {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .close-fact:hover {
+            transform: scale(1.3);
+            color: var(--rainbow-1);
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes rainbowText {
+            0% { color: var(--rainbow-1); }
+            20% { color: var(--rainbow-3); }
+            40% { color: var(--rainbow-5); }
+            60% { color: var(--rainbow-7); }
+            80% { color: var(--rainbow-9); }
+            100% { color: var(--rainbow-10); }
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes btnPulse {
+            0% { transform: translateY(-5px) rotate(3deg) scale(1); }
+            50% { transform: translateY(-5px) rotate(3deg) scale(1.1); }
+            100% { transform: translateY(-5px) rotate(3deg) scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Fun extras */
+        .gallery-item:nth-child(5n) {
+            border-color: var(--rainbow-1);
+        }
+        
+        .gallery-item:nth-child(5n+1) {
+            border-color: var(--rainbow-3);
+        }
+        
+        .gallery-item:nth-child(5n+2) {
+            border-color: var(--rainbow-5);
+        }
+        
+        .gallery-item:nth-child(5n+3) {
+            border-color: var(--rainbow-7);
+        }
+        
+        .gallery-item:nth-child(5n+4) {
+            border-color: var(--rainbow-9);
+        }
+        
+        .gallery-item:nth-child(7n) {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .gallery-item:nth-child(11n) {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .modal-media {
+                max-width: 95%;
+                max-height: 60vh;
+            }
+            
+            .nav-btn {
+                font-size: 2.5rem;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .close-btn {
+                font-size: 3rem;
+                top: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .modal-caption {
+                font-size: 1.2rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .controls {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CollegeTips.in </h1>
+        <p>India's Biggest 
+Recruiter of Interns!</p>
+        <div class="confetti" style="left:10%;animation-duration:8s;"></div>
+        <div class="confetti" style="left:20%;animation-duration:10s;"></div>
+        <div class="confetti" style="left:35%;animation-duration:7s;"></div>
+        <div class="confetti" style="left:50%;animation-duration:9s;"></div>
+        <div class="confetti" style="left:65%;animation-duration:6s;"></div>
+        <div class="confetti" style="left:80%;animation-duration:11s;"></div>
+        <div class="confetti" style="left:90%;animation-duration:8s;"></div>
+    </header>
+
+    <div class="controls">
+        <button class="filter-btn active" data-category="all">🌈 All Colors</button>
+        <button class="filter-btn" data-category="team">🎉 Team Vibes</button>
+        <button class="filter-btn" data-category="creative">🎨 Creative Madness</button>
+        <button class="filter-btn" data-category="workplay">💼 Work Hard, Party Harder</button>
+        <button class="filter-btn" data-category="behind">🎬 Behind The Chaos</button>
+    </div>
+
+    <div class="gallery">
+        <!-- Team Vibes -->
+        <div class="gallery-item" data-category="team">
+            <img src="https://www.collegetips.in/images/birthday.jpg" alt="Office birthday madness">
+            <div class="caption">When the birthday cake was 90% frosting and 10% poor life choices</div>
+            <div class="category-tag">🎉 Team Vibes</div>
+        </div>
+        
+        <div class="gallery-item" data-category="team">
+            <img src="https://www.collegetips.in/images/wedding.jpg" alt="Team outing">
+            <div class="caption">Annual "trust fall" exercise that somehow became literal</div>
+            <div class="category-tag">🎉 Team Vibes</div>
+        </div>
+        
+        <!-- Creative Campaigns -->
+        <div class="gallery-item" data-category="creative">
+            <img src="https://www.collegetips.in/images/office-party.jpg" alt="Creative photoshoot">
+            <div class="caption">"This will look professional" - Famous last words</div>
+            <div class="category-tag">🎨 Creative Madness</div>
+        </div>
+        
+        <div class="gallery-item" data-category="creative">
+            <img src="https://www.collegetips.in/images/night-party.jpg" alt="Brainstorm session">
+            <div class="caption">When the coffee runs out but the deadline doesn't</div>
+            <div class="category-tag">🎨 Creative Madness</div>
+        </div>
+        
+        <!-- Work Hard, Play Hard -->
+        <div class="gallery-item" data-category="workplay">
+            <img src="https://www.collegetips.in/images/office-party.jpg" alt="Office party">
+            <div class="caption">That moment when HR out-parties everyone</div>
+            <div class="category-tag">💼 Work Hard, Party Harder</div>
+        </div>
+        
+        <div class="gallery-item" data-category="workplay">
+            <img src="https://www.collegetips.in/images/birthday.jpg" alt="Friday afternoon">
+            <div class="caption">"We should get back to work" - Nobody, ever</div>
+            <div class="category-tag">💼 Work Hard, Party Harder</div>
+        </div>
+        
+        <!-- Behind-The-Scenes -->
+        <div class="gallery-item" data-category="behind">
+            <img src="https://www.collegetips.in/images/night-party.jpg" alt="Behind the scenes">
+            <div class="caption">What really happens after the "professional" photoshoot</div>
+            <div class="category-tag">🎬 Behind The Chaos</div>
+        </div>
+        
+        <div class="gallery-item" data-category="behind">
+            <img src="https://www.collegetips.in/images/wedding.jpg" alt="Setup">
+            <div class="caption">The 2 hours of setup for that one perfect Instagram shot</div>
+            <div class="category-tag">🎬 Behind The Chaos</div>
+        </div>
+        
+        <!-- More items for each category (repeating images with different captions) -->
+        <div class="gallery-item" data-category="team">
+            <img src="https://www.collegetips.in/images/office-party.jpg" alt="Team lunch">
+            <div class="caption">"Team bonding" that's really just an excuse to eat cake</div>
+            <div class="category-tag">🎉 Team Vibes</div>
+        </div>
+        
+        <div class="gallery-item" data-category="creative">
+            <img src="https://www.collegetips.in/images/birthday.jpg" alt="Creative session">
+            <div class="caption">Our "creative process" looks suspiciously like a party</div>
+            <div class="category-tag">🎨 Creative Madness</div>
+        </div>
+        
+        <div class="gallery-item" data-category="workplay">
+            <img src="https://www.collegetips.in/images/wedding.jpg" alt="Office games">
+            <div class="caption">When the boss suggests "team building exercises"</div>
+            <div class="category-tag">💼 Work Hard, Party Harder</div>
+        </div>
+        
+        <div class="gallery-item" data-category="behind">
+            <img src="https://www.collegetips.in/images/office-party.jpg" alt="Behind the scenes">
+            <div class="caption">The 47 outtakes before we got one usable photo</div>
+            <div class="category-tag">🎬 Behind The Chaos</div>
+        </div>
+        
+        <div class="gallery-item" data-category="team">
+            <img src="https://www.collegetips.in/images/night-party.jpg" alt="Team meeting">
+            <div class="caption">"This meeting could have been an email" - Everyone, always</div>
+            <div class="category-tag">🎉 Team Vibes</div>
+        </div>
+        
+        <div class="gallery-item" data-category="creative">
+            <img src="https://www.collegetips.in/images/wedding.jpg" alt="Brainstorming">
+            <div class="caption">When someone says "think outside the box" unironically</div>
+            <div class="category-tag">🎨 Creative Madness</div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+            <span class="nav-btn prev">&#10094;</span>
+            <img class="modal-media" id="modalImage">
+            <div class="modal-caption" id="modalCaption"></div>
+            <span class="nav-btn next">&#10095;</span>
+        </div>
+    </div>
+
+    <!-- Fun fact popup -->
+    <div class="fun-fact" id="funFact">
+        <span class="close-fact">&times;</span>
+        <h3>🌈 DID YOU KNOW? 🌈</h3>
+        <p id="factText">The human eye can distinguish about 10 million different colors - and this gallery uses approximately ALL OF THEM!</p>
+    </div>
+
+    <footer>
+        <p>Made with <span class="emoji">❤️</span> and <span class="emoji">🌈</span> RADIANT COLORS <span class="emoji">🎉</span></p>
+        <p class="emoji">📸 😂 🎨 🍰 🎭 💃 🤪</p>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const category = button.dataset.category;
+                
+                // Filter items
+                galleryItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+                
+                // Rainbow button effect
+                button.style.animation = 'none';
+                void button.offsetWidth; // Trigger reflow
+                button.style.animation = 'btnPulse 0.5s ease, rainbowText 2s linear';
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const closeBtn = document.querySelector('.close-btn');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        
+        let currentIndex = 0;
+        let currentItems = [];
+        
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                // Get all visible items based on current filter
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.category;
+                currentItems = Array.from(galleryItems).filter(item => {
+                    return activeFilter === 'all' || item.dataset.category === activeFilter;
+                }).filter(item => item.style.display !== 'none');
+                
+                currentIndex = currentItems.indexOf(item);
+                updateModal();
+                modal.style.display = 'flex';
+                setTimeout(() => modal.style.opacity = '1', 10);
+                
+                // Change modal background color based on category
+                const colors = {
+                    'team': 'var(--rainbow-1)',
+                    'creative': 'var(--rainbow-5)',
+                    'workplay': 'var(--rainbow-9)',
+                    'behind': 'var(--rainbow-7)',
+                    'all': 'var(--rainbow-3)'
+                };
+                modal.style.background = `linear-gradient(45deg, ${colors[activeFilter]}, var(--dark))`;
+            });
+        });
+        
+        function updateModal() {
+            const item = currentItems[currentIndex];
+            const img = item.querySelector('img');
+            
+            modalImg.src = img.src;
+            modalCaption.textContent = item.querySelector('.caption').textContent;
+            
+            // Add rainbow border to modal image
+            const colors = ['#FF355E', '#FF9966', '#FFFF66', '#66FF66', '#50BFE6', '#FF6EFF'];
+            modalImg.style.borderImage = `linear-gradient(45deg, ${colors.join(',')}) 1`;
+            modalImg.style.borderWidth = '5px';
+        }
+        
+        closeBtn.addEventListener('click', () => {
+            modal.style.opacity = '0';
+            setTimeout(() => modal.style.display = 'none', 400);
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+            updateModal();
+            animateNav('prev');
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % currentItems.length;
+            updateModal();
+            animateNav('next');
+        });
+        
+        function animateNav(direction) {
+            modalImg.style.animation = 'none';
+            void modalImg.offsetWidth; // Trigger reflow
+            modalImg.style.animation = `${direction === 'prev' ? 'slideFromLeft' : 'slideFromRight'} 0.5s ease`;
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    closeBtn.click();
+                } else if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                }
+            }
+        });
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeBtn.click();
+            }
+        });
+
+        // Confetti animation
+        const confetti = document.querySelectorAll('.confetti');
+        confetti.forEach((el, i) => {
+            const size = Math.random() * 15 + 10;
+            el.style.width = `${size}px`;
+            el.style.height = `${size}px`;
+            el.style.animationDelay = `${i * 0.5}s`;
+            el.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        });
+
+        // Fun facts
+        const funFacts = [
+            "🌈 The human eye can see about 10 million colors - this gallery uses approximately ALL OF THEM!",
+            "🎭 The average person will spend 6 months of their life waiting for photos to load (just kidding... maybe)",
+            "📸 The most Instagrammed food is pizza - which explains all our team lunch photos!",
+            "😂 Laughter increases blood flow by 22% - making this gallery basically cardio!",
+            "🎨 The color yellow makes you hungry - which explains why we ordered 3 pizzas during that photoshoot",
+            "💃 The world record for most people in a conga line is 119,986 - we're aiming to beat that at the next office party!"
+        ];
+        
+        const funFact = document.getElementById('funFact');
+        const factText = document.getElementById('factText');
+        
+        // Show random fact after 8 seconds
+        setTimeout(() => {
+            factText.textContent = funFacts[Math.floor(Math.random() * funFacts.length)];
+            funFact.style.display = 'block';
+        }, 8000);
+        
+        document.querySelector('.close-fact').addEventListener('click', () => {
+            funFact.style.display = 'none';
+        });
+        
+        // Show new fact every 30 seconds
+        setInterval(() => {
+            if (Math.random() > 0.3 && funFact.style.display === 'none') {
+                factText.textContent = funFacts[Math.floor(Math.random() * funFacts.length)];
+                funFact.style.display = 'block';
+                
+                // Change background color
+                const colors = ['var(--rainbow-1)', 'var(--rainbow-3)', 'var(--rainbow-5)', 'var(--rainbow-7)', 'var(--rainbow-9)'];
+                funFact.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
+            }
+        }, 30000);
+        
+        // Make emojis in footer dance randomly
+        const emojis = document.querySelectorAll('.emoji');
+        setInterval(() => {
+            emojis.forEach(emoji => {
+                if (Math.random() > 0.7) {
+                    emoji.style.animation = `dance ${Math.random() * 0.5 + 0.5}s ease`;
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
